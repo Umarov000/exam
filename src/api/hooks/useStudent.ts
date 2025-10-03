@@ -4,6 +4,7 @@ import { api } from "../../api";
 export const useStudents = () => {
   const queryClient = useQueryClient();
 
+  // GET all students
   const getStudents = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -12,10 +13,10 @@ export const useStudents = () => {
     },
   });
 
-  const createStudent = useMutation<any, any, any>({
-    // queryKey: ["users"],
-    mutationFn: async (newPhone) => {
-      const { data } = await api.post("/user", newPhone);
+  // CREATE student
+  const createStudent = useMutation({
+    mutationFn: async (newStudent: any) => {
+      const { data } = await api.post("/user", newStudent);
       return data;
     },
     onSuccess: () => {
@@ -23,20 +24,24 @@ export const useStudents = () => {
     },
   });
 
-  const updateStudent = useMutation<any, any, any>({
-    // queryKey: ["users", id],
-    mutationFn: async (phone) => {
-      const { data } = await api.put(`/user/${phone.id}`, phone);
+  // UPDATE student
+  const updateStudent = useMutation({
+    mutationFn: async (student: any) => {
+      const { data } = await api.put(`/user/${student.id}`, student);
       return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
     },
   });
 
-  const deleteStudent = useMutation<any, any, any>({
-    mutationFn: async (id) => {
+  // DELETE student
+  const deleteStudent = useMutation({
+    mutationFn: async (id: number | string) => {
       await api.delete(`/user/${id}`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["users"]);
+      queryClient.invalidateQueries({ queryKey: ["users"] });
     },
   });
 

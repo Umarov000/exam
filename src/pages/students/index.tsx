@@ -1,36 +1,10 @@
 import { memo } from "react";
 import Box from "@/components/ui/Box";
 import Title from "@/components/ui/Title";
-import StudentView from "@/components/student-view/StudentView";
-import { useStudents } from "../../api/hooks/useStudent";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, } from "react-router-dom";
 
 const Student = () => {
-  const { pathname } = useLocation();
-  const { getStudents } = useStudents();
-  const { data } = getStudents;
-  const navLinks = [
-    {
-      to: "/",
-      label: "All",
-      active: pathname === "/",
-    },
-    {
-      to: "/students",
-      label: "Students",
-      active: pathname.startsWith("/students"),
-    },
-    {
-      to: "/create-student",
-      label: "Male",
-      active: pathname.startsWith("/create-student"),
-    },
-    {
-      to: "/bookmark",
-      label: "Female",
-      active: pathname.startsWith("/bookmark"),
-    },
-  ];
+  
   return (
     <div>
       <Box>

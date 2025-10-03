@@ -2,13 +2,11 @@ import { memo, useEffect, useState } from "react";
 import Box from "../ui/Box";
 import { Bookmark, SquarePen, Trash } from "lucide-react";
 import { useStudents } from "../../api/hooks/useStudent";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../../lib";
+import { useDispatch, } from "react-redux";
 import { toggleLike } from "../../lib/features/savedSlice";
 
 const StudentView = ({ data }: { data: any }) => {
    const dispatch = useDispatch();
-   const wishlist = useSelector((state: RootState) => state.wishlist.value);
   const [bool, setBool] = useState(false);
   useEffect(() => {}, [bool]);
   const { deleteStudent } = useStudents();
